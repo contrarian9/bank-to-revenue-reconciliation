@@ -1,4 +1,4 @@
-```python
+
 """Core reconciliation logic for the Bank-to-Revenue Reconciliation Tool."""
 from __future__ import annotations
 
@@ -117,4 +117,3 @@ def reconcile(
     out["review_flag"] = out["absolute_difference"] > tolerance
 
     return out.sort_values("month").reset_index(drop=True)
-```
