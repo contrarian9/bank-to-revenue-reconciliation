@@ -21,35 +21,43 @@ Python 3.10+ recommended.
 
 Create a virtual environment:
 
+```bash
 python -m venv .venv
+```
 
 Activate it.
 
-macOS/Linux:
+**macOS/Linux:**
 
+```bash
 source .venv/bin/activate
+```
 
-Windows PowerShell:
+**Windows PowerShell:**
 
+```powershell
 .venv\Scripts\Activate.ps1
+```
 
 Install dependencies:
 
+```bash
 python -m pip install -r requirements.txt
+```
 
 Launch the app:
 
+```bash
 python -m streamlit run app.py
+```
+
 ## Run tests
 
-Install dependencies, including the test runner:
-
+```bash
 python -m pip install -r requirements.txt
 python -m pip install pytest
-
-Run the tests from the repository root:
-
 python -m pytest -q
+```
 
 ## CSV formats
 
