@@ -1,91 +1,70 @@
 # Bank-to-Revenue Reconciliation
 
-An open-source screening tool for comparing positive bank transaction amounts with reported monthly revenue and flagging differences for human review.
+An open-source review aid for comparing bank credits with reported revenue. Classify transactions before reconciliation to separate revenue from transfers, loans, refunds, and other non-revenue credits.
+
+This tool supports screening and investigation. It is not an audit opinion or proof of revenue.
 
 ## What it does
 
 - Accepts bank transaction and reported-revenue CSV files.
-- Aggregates positive bank entries by month.
-- Compares monthly bank credits with reported revenue.
-- Flags months where the absolute difference exceeds a configurable threshold.
-- Exports a CSV reconciliation report.
-- Includes synthetic sample data and unit tests.
+- Lets users classify bank transactions before reconciliation.
+- Includes only credits classified as revenue in the revenue comparison.
+- Reports excluded non-revenue credits and unclassified credits separately.
+- Compares monthly revenue-classified credits with reported revenue.
+- Flags monthly differences exceeding a configurable threshold.
+- Exports the reconciliation report and classified transactions as CSV.
+- Includes synthetic sample data and automated tests.
 
 ## What it does not do
 
-A bank credit is not necessarily revenue. Credits may include loans, transfers between accounts, refunds, GST, capital contributions, customer advances, or other non-revenue items. This tool does not classify credits or establish completeness, occurrence, cut-off, or accounting correctness. Every flag requires human investigation. Do not upload confidential client data to an environment you do not control.
+A bank credit is not necessarily revenue. Classification requires human judgment and supporting evidence. The tool does not independently establish completeness, occurrence, cut-off, or accounting correctness. Review all flagged differences and unclassified credits.
+
+Do not upload confidential client data to an environment you do not control.
 
 ## Run locally
 
-Python 3.10+ recommended.
+Python 3.10 or later is recommended.
 
-Create a virtual environment:
+Create and activate a virtual environment:
 
-```bash
-python -m venv .venv
-```
+**macOS/Linux**
 
-Activate it.
+    python3 -m venv .venv
+    source .venv/bin/activate
 
-**macOS/Linux:**
+**Windows PowerShell**
 
-```bash
-source .venv/bin/activate
-```
+    python -m venv .venv
+    .venv\Scripts\Activate.ps1
 
-**Windows PowerShell:**
+Install dependencies and launch the app:
 
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-Install dependencies:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-Launch the app:
-
-```bash
-python -m streamlit run app.py
-```
+    python -m pip install -r requirements.txt
+    python -m streamlit run app.py
 
 ## Run tests
 
-```bash
-python -m pip install -r requirements.txt
-python -m pip install pytest
-python -m pytest -q
-```
+Install the dependencies and run:
+
+    python -m pip install -r requirements.txt
+    python -m pip install pytest
+    python -m pytest -q
 
 ## CSV formats
 
-Bank transactions (`bank_transactions.csv`):
+**Bank transactions**
 
-| date | description | amount |
-|---|---|---:|
-| 2026-01-05 | Customer receipt | 80000 |
+Required columns: `date`, `description`, `amount`.
 
-Reported revenue (`reported_revenue.csv`):
+**Reported revenue**
 
-| month | reported_revenue |
-|---|---:|
-| 2026-01-01 | 125000 |
+Required columns: `month`, `reported_revenue`.
 
-Dates can be any parseable date. The month field is normalized to its calendar month. Use positive values for credits and negative values for debits; only positive values are included in the bank-credit comparison.
-
-## Roadmap
-
-- Configurable credit classification (customer receipts, transfers, loans, refunds, taxes).
-- Separate GST/tax and inter-account transfer handling.
-- Evidence-linked exception notes.
-- Excel input and output.
-- Additional tests and contributor documentation.
+The app includes downloadable synthetic sample CSVs. Dates must be parseable, and the month field is normalized to its calendar month. Positive bank amounts represent credits. Classify each credit carefully; do not assume all credits are revenue.
 
 ## Contributing
 
-Issues and pull requests are welcome. Please include tests for changes to reconciliation logic. Do not submit real client bank statements, PANs, account numbers, or other confidential information.
+Issues and pull requests are welcome. Please include tests for changes to reconciliation logic. Never submit real client bank statements, account numbers, PANs, or other confidential information.
 
 ## Disclaimer
 
