@@ -19,11 +19,13 @@ A bank credit is not necessarily revenue. Credits may include loans, transfers b
 
 Python 3.10+ recommended.
 
-Create and activate a virtual environment:
+Create a virtual environment:
 
 ```bash
 python -m venv .venv
 ```
+
+Activate it.
 
 macOS/Linux:
 
@@ -37,17 +39,29 @@ Windows PowerShell:
 .venv\Scripts\Activate.ps1
 ```
 
-Install dependencies and launch the app:
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
+```
+
+Launch the app:
+
+```bash
 streamlit run app.py
 ```
 
 ## Run tests
 
+Install pytest if it is not already installed:
+
 ```bash
 pip install pytest
+```
+
+Run the tests from the repository root:
+
+```bash
 pytest -q
 ```
 
